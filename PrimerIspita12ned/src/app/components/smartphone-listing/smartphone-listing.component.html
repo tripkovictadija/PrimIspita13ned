@@ -1,0 +1,64 @@
+<form [formGroup]="smartphoneForm" class="container mt-5 pt-5" (ngSubmit)="submitForm()">
+    <div class="form-group">
+        <label for="id">ID</label>
+        <input class="form-control" formControlName="id" type="number" name="id">
+    </div>
+    <div class="form-group">
+        <label for="brend">Brend</label>
+        <input class="form-control" formControlName="brend" type="text" name="brend">
+    </div>
+    <div class="form-group">
+        <label for="model">Model</label>
+        <input class="form-control" formControlName="model" type="text" name="model">
+    </div>
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input class="form-control" formControlName="image" type="text" name="image">
+    </div>
+    <div class="form-group">
+        <label for="video">Video</label>
+        <input class="form-control" formControlName="video" type="text" name="video">
+    </div>
+    <div class="col button-holder d-flex justify-content-center align-items-center mt-4">
+        <button type="submit" name="submit" class="btn btn-success">Dodaj</button>
+    </div>
+</form>
+
+<div class="container mt-5 pt-5">
+    <div class="mb-3">
+        <h3>Search</h3>
+        <input [(ngModel)]="searchText" placeholder="search text goes here">
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th scope="col">ID</th>
+                <th scope="col">Brend</th>
+                <th scope="col">Model</th>
+                <th scope="col">Image</th>
+                <th scope="col">Video</th>
+                <th scope="col">Read</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let smartphone of smartphones | pipe : searchText; index as i;">
+                <th scope="row">{{smartphone.id}}</th>
+                <td>{{smartphone.brend}}</td>
+                <th>{{smartphone.model}}</th>
+                <td>{{smartphone.image}}</td>
+                <td>{{smartphone.video}}</td>
+                <td>
+                    <a [routerLink]="['/smartphones', smartphone.id]" class="btn btn-primary">Read smartphone</a>
+                </td>
+                <td>
+                    <button (click)="deleteSmartphone(smartphone.id)" type="button" class="btn btn-danger">Delete
+                        smartphone</button>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
